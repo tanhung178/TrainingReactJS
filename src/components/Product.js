@@ -5,10 +5,10 @@ class Product extends Component {
   constructor(props) {
     super(props);
 
-    // this.addToCard = this.addToCard.bind(this);
+    this.addToCard = this.addToCard.bind(this);
   }
 
-  addToCard = () => {
+  addToCard() {
     console.log('Da mua thanh cong' + this.props.name);
   }
 

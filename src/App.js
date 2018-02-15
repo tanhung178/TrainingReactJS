@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 import Product from './components/Product';
 
 class App extends Component {
-  onClick(name) {
-    console.log('This is app component' + name);
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+    this.onAddProduct = this.onAddProduct.bind(this);
+  }
+
+  onAddProduct() {
+    console.log('add product: ' + this.refs.producName.value);
+  }
+
+  onClick() {
+    console.log('This is app component');
   }
 
   render() {
@@ -35,12 +46,12 @@ class App extends Component {
       let result = '';
       if (product.status) {
         result = <Product
-                  key={index}
-                  id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                />
+          key={index}
+          id={product.id}
+          name={product.name}
+          price={product.price}
+          image={product.image}
+        />
       }
       return result;
     });
@@ -52,18 +63,32 @@ class App extends Component {
         </nav>
         <div className="container">
           <div className="row">
-            <div className="row">
-              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                {elements}
+
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div className="panel panel-primary">
+                <div className="panel-heading">
+                  <h3 className="panel-title">Thêm sản phẩm</h3>
+                </div>
+                <div className="panel-body">
+                  <div className="form-group">
+                    <label>Tên sản phẩm</label>
+                    <input type="text" className="form-control" ref="producName" placeholder="Nhập tên sản phẩm" />
+                  </div>
+                  <button type="submit" className="btn btn-primary" onClick={ this.onAddProduct }>Lưu</button>
+                </div>
               </div>
-              
-              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button type="button" className="btn btn-warning" onClick={ name => this.onClick(name) }>
-                  Click on me!
-                </button>
-              </div>
-              
             </div>
+
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              {elements}
+            </div>
+
+            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <button type="button" className="btn btn-warning" onClick={ this.onClick }>
+                Click on me!
+                </button>
+            </div>
+
           </div>
         </div>
       </div>
